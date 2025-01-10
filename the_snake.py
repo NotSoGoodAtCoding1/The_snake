@@ -36,6 +36,8 @@ class GameObject:
         self.body_color = None
 
     def draw(self):
+        """базовый метод отрисовки."""
+
         pass
 
 
@@ -48,19 +50,23 @@ class Apple(GameObject):
         self.randomize_position()
 
     def randomize_position(self):
+        """Метод для полученя случайной позиции."""
+
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
         )
 
     def draw(self):
+        """Метод для отрисовки яблока."""
+
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 
 class BadApple(GameObject):
-    """Класс для неправильной еды.(bad apple reference)"""
+    """Класс для неправильной еды.(bad apple reference)."""
 
     def __init__(self):
         super().__init__()
@@ -68,12 +74,16 @@ class BadApple(GameObject):
         self.randomize_position()
 
     def randomize_position(self):
+        """Метод для получения случайной позиции плохого яблока."""
+
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
         )
 
     def draw(self):
+        """Метод для отрисовки плохого яблока."""
+
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -91,11 +101,15 @@ class Snake(GameObject):
         self.growing = False
 
     def update_direction(self):
+        """Метод для изменения направления движения змейки."""
+
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self):
+        """Метод для движения змейки (головы)."""
+
         head_x, head_y = self.positions[0]
         dx, dy = self.direction
         new_head = (
@@ -112,9 +126,13 @@ class Snake(GameObject):
             self.growing = False
 
     def grow(self):
+        """Метод, позволяет змейке рости."""
+
         self.growing = True
 
     def shrink(self):
+        """Метод, позволяет змейке уменьшаться."""
+
         if len(self.positions) > 1:
             self.positions.pop()
 
@@ -122,6 +140,8 @@ class Snake(GameObject):
         self.__init__()
 
     def get_head_position(self):
+        """Метод, возвращает положение головы змейки."""
+
         return self.positions[0]
 
     def draw(self):
