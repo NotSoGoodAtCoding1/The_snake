@@ -37,7 +37,6 @@ class GameObject:
 
     def draw(self):
         """базовый метод отрисовки."""
-
         pass
 
 
@@ -51,7 +50,6 @@ class Apple(GameObject):
 
     def randomize_position(self):
         """Метод для полученя случайной позиции."""
-
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
@@ -59,7 +57,6 @@ class Apple(GameObject):
 
     def draw(self):
         """Метод для отрисовки яблока."""
-
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -75,7 +72,6 @@ class BadApple(GameObject):
 
     def randomize_position(self):
         """Метод для получения случайной позиции плохого яблока."""
-
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
@@ -83,7 +79,6 @@ class BadApple(GameObject):
 
     def draw(self):
         """Метод для отрисовки плохого яблока."""
-
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
@@ -133,6 +128,7 @@ class Snake(GameObject):
             self.positions.pop()
 
     def reset(self):
+        """Метод, испольуется при отрисовке новой головы."""
         self.__init__()
 
     def get_head_position(self):
