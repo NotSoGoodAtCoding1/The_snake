@@ -24,7 +24,7 @@ SPEED = 10
 
 # Настройка игрового окна:
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-pygame.display.set_caption('Змейка')
+pygame.display.set_caption("Змейка")
 clock = pygame.time.Clock()
 
 
@@ -50,7 +50,7 @@ class Apple(GameObject):
     def randomize_position(self):
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
-            randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+            randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
         )
 
     def draw(self):
@@ -60,7 +60,7 @@ class Apple(GameObject):
 
 
 class BadApple(GameObject):
-    """Класс для неправильной еды.(bad apple reference) """
+    """Класс для неправильной еды.(bad apple reference)"""
 
     def __init__(self):
         super().__init__()
@@ -70,7 +70,7 @@ class BadApple(GameObject):
     def randomize_position(self):
         self.position = (
             randint(0, GRID_WIDTH - 1) * GRID_SIZE,
-            randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+            randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
         )
 
     def draw(self):
@@ -98,7 +98,10 @@ class Snake(GameObject):
     def move(self):
         head_x, head_y = self.positions[0]
         dx, dy = self.direction
-        new_head = ((head_x + dx * GRID_SIZE) % SCREEN_WIDTH, (head_y + dy * GRID_SIZE) % SCREEN_HEIGHT)
+        new_head = (
+            (head_x + dx * GRID_SIZE) % SCREEN_WIDTH,
+            (head_y + dy * GRID_SIZE) % SCREEN_HEIGHT,
+        )
 
         if new_head in self.positions:
             self.reset()
@@ -173,5 +176,5 @@ def main():
         pygame.display.update()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
