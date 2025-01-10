@@ -59,6 +59,26 @@ class Apple(GameObject):
         pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
 
+class BadApple(GameObject):
+    """Класс для неправильной еды.(bad apple reference) """
+
+    def __init__(self):
+        super().__init__()
+        self.body_color = (255, 255, 0)  # Желтый цвет
+        self.randomize_position()
+
+    def randomize_position(self):
+        self.position = (
+            randint(0, GRID_WIDTH - 1) * GRID_SIZE,
+            randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+        )
+
+    def draw(self):
+        rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, rect)
+        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+
+
 class Snake(GameObject):
     """Класс для змейки."""
 
@@ -90,6 +110,10 @@ class Snake(GameObject):
 
     def grow(self):
         self.growing = True
+
+    def shrink(self):
+        if len(self.positions) > 1:
+            self.positions.pop()
 
     def reset(self):
         self.__init__()
@@ -126,6 +150,7 @@ def main():
     pygame.init()
     snake = Snake()
     apple = Apple()
+    bad_food = BadApple()
 
     while True:
         clock.tick(SPEED)
@@ -137,8 +162,13 @@ def main():
             snake.grow()
             apple.randomize_position()
 
+        if snake.get_head_position() == bad_food.position:
+            snake.shrink()
+            bad_food.randomize_position()
+
         screen.fill(BOARD_BACKGROUND_COLOR)
         apple.draw()
+        bad_food.draw()
         snake.draw()
         pygame.display.update()
 
