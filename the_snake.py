@@ -102,14 +102,12 @@ class Snake(GameObject):
 
     def update_direction(self):
         """Метод для изменения направления движения змейки."""
-
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     def move(self):
         """Метод для движения змейки (головы)."""
-
         head_x, head_y = self.positions[0]
         dx, dy = self.direction
         new_head = (
@@ -127,12 +125,10 @@ class Snake(GameObject):
 
     def grow(self):
         """Метод, позволяет змейке рости."""
-
         self.growing = True
 
     def shrink(self):
         """Метод, позволяет змейке уменьшаться."""
-
         if len(self.positions) > 1:
             self.positions.pop()
 
@@ -141,10 +137,10 @@ class Snake(GameObject):
 
     def get_head_position(self):
         """Метод, возвращает положение головы змейки."""
-
         return self.positions[0]
 
     def draw(self):
+        """Метод, отрисовка тела."""
         for position in self.positions:
             rect = pygame.Rect(position, (GRID_SIZE, GRID_SIZE))
             pygame.draw.rect(screen, self.body_color, rect)
